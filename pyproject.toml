@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "hexlet-code"
+version = "0.1.0"
+description = ""
+authors = ["Aleksandr Vednikov <aleasterxs@mail.ru>"]
+readme = "README.md"
+packages = [
+    {include = "gendiff"}
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+argparse = "^1.4.0"
+
+
+[tool.poetry.scripts]
+gendiff = "gendiff.gendiff:main"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
