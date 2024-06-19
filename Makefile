@@ -4,9 +4,6 @@ install:
 test:
 	poetry run pytest
 
-test-coverage:
-	poetry run coverage
-
 lint:
 	poetry run flake8
 
