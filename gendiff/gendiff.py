@@ -13,11 +13,11 @@ def main():
     parser.add_argument('-f', '--format',
                         help='set format of output')
     args = parser.parse_args()
-    diff = gendiff(args.first_file, args.second_file)
+    diff = generate_diff(args.first_file, args.second_file)
     print(diff)
 
 
-def gendiff(path_1: str, path_2: str):
+def generate_diff(path_1: str, path_2: str):
     json_diff = gen_json_diff(path_1, path_2)
     return json_diff
 
