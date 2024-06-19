@@ -17,6 +17,10 @@ argparse = "^1.4.0"
 gendiff = "gendiff.gendiff:main"
 
 
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.0.0"
+pytest = "^8.2.2"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
