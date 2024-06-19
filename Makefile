@@ -3,10 +3,12 @@ install:
 
 test:
 	poetry run pytest
+
+lint:
 	poetry run flake8
 
 demo:
-	poetry run gendiff "tests/file_1.json" "tests/file_2.json"
+	poetry run gendiff "file_1.json" "file_2.json"
 
 build:
 	poetry build
