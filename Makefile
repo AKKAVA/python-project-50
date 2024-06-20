@@ -24,3 +24,6 @@ package-uninstall:
 
 record:
 	asciinema rec --overwrite cast/gendiff.cast
+
+upload:
+	asciinema upload cast/gendiff.cast

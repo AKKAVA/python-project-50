@@ -1,4 +1,4 @@
 [![Actions Status](https://github.com/AKKAVA/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/AKKAVA/python-project-50/actions) [![Maintainability](https://api.codeclimate.com/v1/badges/461ff3e377e4b8704eb4/maintainability)](https://codeclimate.com/github/AKKAVA/python-project-50/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/461ff3e377e4b8704eb4/test_coverage)](https://codeclimate.com/github/AKKAVA/python-project-50/test_coverage)
 
 ### Asciiema cast
-[![asciicast](https://asciinema.org/a/D0S0rCcX14Y0HNOrInKw5fY8T.svg)](https://asciinema.org/a/D0S0rCcX14Y0HNOrInKw5fY8T)
+[![asciicast](https://asciinema.org/a/naThHupdVlgC7HtVEfnAEL9G5.svg)](https://asciinema.org/a/naThHupdVlgC7HtVEfnAEL9G5)
