@@ -1,51 +1,25 @@
-from .parser import parse_file
-from .scripts.scripts import form_str
-import argparse
+from . import comparator as comporator
+from . import file_parser as file_parser
+from . import arg_parser as arg_parser
+from .styles import stylish as stylish
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        prog='gendiff',
-        description='Compares two configuration files and shows a difference.'
-    )
-    parser.add_argument('first_file')
-    parser.add_argument('second_file')
-
-    parser.add_argument('-f', '--format',
-                        help='set format of output')
-    args = parser.parse_args()
+    args = arg_parser.arg_parser()
     diff = generate_diff(args.first_file, args.second_file)
     print(diff)
 
 
-def generate_diff(path_1: str, path_2: str):
+def generate_diff(path_1: str, path_2: str, style=stylish.stylish) -> str:
     '''
     Get two paths to file
-    and generete diff between them\n\n
-
-    "+" - absent in first file\n
-    "-" - absent in second file\n
-    "no simbol" - present in both files
+    end generete diff between them
     '''
-    result = '{\n'
-    file_1, file_2 = parse_file(path_1), parse_file(path_2)
-    keys_1, keys_2 = list(file_1.keys()), list(file_2.keys())
+    data_1, data_2 = file_parser.read_file(path_1), file_parser.read_file(path_2)
+    diff = comporator.compare_data(data_1, data_2)
+    styled_diff = style(diff)
 
-    for key in sorted(keys_1):
-        if key not in keys_2:
-            result += form_str(key, file_1, simbol='-')
-        elif file_1[key] != file_2[key]:
-            result += form_str(key, file_1, simbol='-')
-            result += form_str(key, file_2, simbol='+')
-            keys_2.pop(keys_2.index(key))
-        else:
-            result += form_str(key, file_1)
-            keys_2.pop(keys_2.index(key))
-    if keys_2:
-        for key in sorted(keys_2):
-            result += form_str(key, file_2, simbol='+')
-    result += '}'
-    return result
+    return styled_diff
 
 
 if __name__ == '__main__':

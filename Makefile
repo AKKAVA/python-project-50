@@ -2,16 +2,13 @@ install:
 	poetry install
 
 test:
-	poetry run pytest
+	poetry run pytest -vv
 
 test-coverage:
 	poetry run pytest --cov --cov-report xml
 
 lint:
 	poetry run flake8
-
-demo:
-	poetry run gendiff "file_1.json" "file_2.json"
 
 build:
 	poetry build

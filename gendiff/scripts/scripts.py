@@ -1,6 +1,5 @@
-import json
-
-
-def form_str(key, vals, simbol=' '):
-    val = json.dumps(vals[key]).strip('"')
-    return f'  {simbol} {key}: {val}\n'
+def sort_diff_by_key(diff: dict):
+    res = dict()
+    for key in sorted(diff.keys()):
+        res.update({key: diff[key]})
+    return res
