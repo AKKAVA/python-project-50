@@ -1,4 +1,4 @@
-from . import comparator as comporator
+from . import comparator as comparator
 from . import file_parser as file_parser
 from . import arg_parser as arg_parser
 from .styles import stylish as stylish
@@ -16,7 +16,7 @@ def generate_diff(path_1: str, path_2: str, style=stylish.stylish) -> str:
     end generete diff between them
     '''
     data_1, data_2 = file_parser.read_file(path_1), file_parser.read_file(path_2)
-    diff = comporator.compare_data(data_1, data_2)
+    diff = comparator.compare_data(data_1, data_2)
     styled_diff = style(diff)
 
     return styled_diff
