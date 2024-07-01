@@ -19,27 +19,26 @@ def plain(diff: dict, path: list = []):
 
         status, vals = value[STATUS], value[VALS]
 
+        if status == UNCHANGED:
+            continue
+
         if status == NESTED:
             cur_path = form_path(path, key)
             res += plain(vals, cur_path)
 
         elif status in (CHANGED, REMOVED, ADDED):
             cur_path = form_path(path, key)
-            # if cur_path:
-            #     formed_path = '.'.join(cur_path)
-            # else:
-            #     formed_path = key
             formed_path = '.'.join(cur_path)
 
             if status == CHANGED:
                 vals_1, vals_2 = vals[FIRST_FILE_VAL], vals[SECOND_FILE_VAL]
                 vals_1, vals_2 = format_val(vals_1), format_val(vals_2)
                 res += f"Property '{formed_path}' was updated. From {vals_1} to {vals_2}\n"
-            
+
             elif status == ADDED:
                 vals = format_val(vals)
                 res += f"Property '{formed_path}' was added with value: {vals}\n"
-            
+
             elif status == REMOVED:
                 res += f"Property '{formed_path}' was removed\n"
     return res
