@@ -18,7 +18,9 @@ YAML_FILES = {
     'file_3': 'tests/fixtures/yaml_files/file_3.yml',
     'file_4': 'tests/fixtures/yaml_files/file_4.yaml',
     'file_5': 'tests/fixtures/yaml_files/file_5.yaml',
-    'file_6': 'tests/fixtures/yaml_files/file_6.yaml'}
+    'file_6': 'tests/fixtures/yaml_files/file_6.yaml',
+    'file_7': 'tests/fixtures/yaml_files/file_7.yml',
+    'file_8': 'tests/fixtures/yaml_files/file_8.yml'}
 
 
 RESULTS = {
@@ -26,7 +28,8 @@ RESULTS = {
     'result_2': 'tests/fixtures/results/result_2.txt',
     'result_3': 'tests/fixtures/results/result_3.txt',
     'result_4': 'tests/fixtures/results/result_4.txt',
-    'result_5': 'tests/fixtures/results/result_5.txt'}
+    'result_5': 'tests/fixtures/results/result_5.txt',
+    'result_6': 'tests/fixtures/results/result_6.txt'}
 
 
 TEST_CASES = [
@@ -39,6 +42,7 @@ TEST_CASES = [
     (YAML_FILES['file_1'], YAML_FILES['file_4'], RESULTS['result_3'], stylish.stylish),
     (YAML_FILES['file_5'], YAML_FILES['file_6'], RESULTS['result_4'], stylish.stylish),
     (JSON_FILES['file_5'], JSON_FILES['file_6'], RESULTS['result_5'], plain.plain),
+    (YAML_FILES['file_7'], YAML_FILES['file_8'], RESULTS['result_6'], stylish.stylish),
 ]
 
 
