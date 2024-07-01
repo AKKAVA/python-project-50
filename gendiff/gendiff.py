@@ -2,11 +2,13 @@ from . import comparator as comparator
 from . import file_parser as file_parser
 from . import arg_parser as arg_parser
 from .styles import stylish as stylish
+from .styles import formater as formater
 
 
 def main():
     args = arg_parser.arg_parser()
-    diff = generate_diff(args.first_file, args.second_file)
+    style = formater.get_style(args.format)
+    diff = generate_diff(args.first_file, args.second_file, style)
     print(diff)
 
 
