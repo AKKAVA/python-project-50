@@ -1,7 +1,6 @@
 import pytest
 import gendiff.gendiff as gd
-from gendiff.styles import stylish as stylish
-from gendiff.styles import plain as plain
+
 
 JSON_FILES = {
     'file_1': 'tests/fixtures/json_files/file_1.json',
@@ -33,16 +32,16 @@ RESULTS = {
 
 
 TEST_CASES = [
-    (JSON_FILES['file_1'], JSON_FILES['file_2'], RESULTS['result_1'], stylish.stylish),
-    (JSON_FILES['file_1'], JSON_FILES['file_3'], RESULTS['result_2'], stylish.stylish),
-    (JSON_FILES['file_1'], JSON_FILES['file_4'], RESULTS['result_3'], stylish.stylish),
-    (JSON_FILES['file_5'], JSON_FILES['file_6'], RESULTS['result_4'], stylish.stylish),
-    (YAML_FILES['file_1'], YAML_FILES['file_2'], RESULTS['result_1'], stylish.stylish),
-    (YAML_FILES['file_1'], YAML_FILES['file_3'], RESULTS['result_2'], stylish.stylish),
-    (YAML_FILES['file_1'], YAML_FILES['file_4'], RESULTS['result_3'], stylish.stylish),
-    (YAML_FILES['file_5'], YAML_FILES['file_6'], RESULTS['result_4'], stylish.stylish),
-    (JSON_FILES['file_5'], JSON_FILES['file_6'], RESULTS['result_5'], plain.plain),
-    (YAML_FILES['file_7'], YAML_FILES['file_8'], RESULTS['result_6'], stylish.stylish),
+    (JSON_FILES['file_1'], JSON_FILES['file_2'], RESULTS['result_1'], 'stylish'),
+    (JSON_FILES['file_1'], JSON_FILES['file_3'], RESULTS['result_2'], 'stylish'),
+    (JSON_FILES['file_1'], JSON_FILES['file_4'], RESULTS['result_3'], 'stylish'),
+    (JSON_FILES['file_5'], JSON_FILES['file_6'], RESULTS['result_4'], 'stylish'),
+    (YAML_FILES['file_1'], YAML_FILES['file_2'], RESULTS['result_1'], 'stylish'),
+    (YAML_FILES['file_1'], YAML_FILES['file_3'], RESULTS['result_2'], 'stylish'),
+    (YAML_FILES['file_1'], YAML_FILES['file_4'], RESULTS['result_3'], 'stylish'),
+    (YAML_FILES['file_5'], YAML_FILES['file_6'], RESULTS['result_4'], 'stylish'),
+    (JSON_FILES['file_5'], JSON_FILES['file_6'], RESULTS['result_5'], 'plain'),
+    (YAML_FILES['file_7'], YAML_FILES['file_8'], RESULTS['result_6'], 'stylish'),
 ]
 
 
