@@ -20,9 +20,10 @@ def generate_diff(path_1: str, path_2: str, style=stylish.stylish) -> str:
     '''
     data_1, data_2 = file_parser.read_file(path_1), file_parser.read_file(path_2)
     diff = comparator.compare_data(data_1, data_2)
-    styled_diff = style(diff).rstrip('\n')
+    styled_diff = style(diff)
+    striped_diff = styled_diff.rstrip('\n')
 
-    return styled_diff
+    return striped_diff
 
 
 if __name__ == '__main__':
