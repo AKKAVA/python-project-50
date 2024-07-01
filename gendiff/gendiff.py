@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from . import comparator as comparator
 from . import file_parser as file_parser
 from . import arg_parser as arg_parser
