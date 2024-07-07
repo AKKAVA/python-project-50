@@ -56,10 +56,10 @@ def compare_data(data_1: dict, data_2: dict) -> dict:
 
             if isinstance(val_1, dict):
                 val_1 = compare_data(val_1, val_1)
-            
+
             if isinstance(val_2, dict):
                 val_2 = compare_data(val_2, val_2)
-            
+
             val = {
                 FIRST_FILE_VAL: val_1,
                 SECOND_FILE_VAL: val_2
@@ -75,7 +75,6 @@ def build_node(key, status, vals) -> dict:
     node = {key: {
         STATUS: status,
         VALS: vals
-        }
-    }
+    }}
 
     return node
