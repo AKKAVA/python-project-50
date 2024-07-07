@@ -1,5 +1,3 @@
-from .scripts import scripts as scripts
-
 # STATUSES
 UNCHANGED = 'UNCHANGED'
 CHANGED = 'CHANGED'
@@ -17,86 +15,67 @@ SECOND_FILE_VAL = 'SECOND_FILE_VAL'
 
 
 def compare_data(data_1: dict, data_2: dict) -> dict:
-
     diff = dict()
 
-    for key in data_1:
-        if key in data_2:
+    keys_1, keys_2 = set(data_1.keys()), set(data_2.keys())
+    keys = sorted(keys_1 | keys_2)
 
-            if data_1[key] == data_2[key]:
-                if isinstance(data_1[key], dict) and isinstance(data_2[key], dict):
-                    diff.update({
-                        key: {
-                            STATUS: NESTED,
-                            VALS: compare_data(data_1[key], data_2[key])
-                        }
-                    })
-                else:
-                    diff.update({
-                        key: {
-                            STATUS: UNCHANGED,
-                            VALS: data_1[key]
-                        }
-                    })
-            else:
-                if isinstance(data_1[key], dict) and isinstance(data_2[key], dict):
-                    diff.update({
-                        key: {
-                            STATUS: NESTED,
-                            VALS: compare_data(data_1[key], data_2[key])
-                        }
-                    })
-                else:
-                    vals_1, vals_2 = data_1[key], data_2[key]
+    for key in keys:
 
-                    if isinstance(vals_1, dict):
-                        vals_1 = compare_data(vals_1, vals_1)
+        if key not in data_2:
+            val = data_1[key]
 
-                    if isinstance(vals_2, dict):
-                        vals_2 = compare_data(vals_2, vals_2)
+            if isinstance(val, dict):
+                val = compare_data(val, val)
 
-                    diff.update({
-                        key: {
-                            STATUS: CHANGED,
-                            VALS: {
-                                FIRST_FILE_VAL: vals_1,
-                                SECOND_FILE_VAL: vals_2
-                            }
-                        }
-                    })
-        else:
-            if isinstance(data_1[key], dict):
-                diff.update({
-                    key: {
-                        STATUS: REMOVED,
-                        VALS: compare_data(data_1[key], data_1[key])
-                    }
-                })
-            else:
-                diff.update({
-                    key: {
-                        STATUS: REMOVED,
-                        VALS: data_1[key]
-                    }
-                })
+            diff.update(build_node(key, REMOVED, val))
+            continue
 
-    for key in data_2:
         if key not in data_1:
-            if isinstance(data_2[key], dict):
-                diff.update({
-                    key: {
-                        STATUS: ADDED,
-                        VALS: compare_data(data_2[key], data_2[key])
-                    }
-                })
-            else:
-                diff.update({
-                    key: {
-                        STATUS: ADDED,
-                        VALS: data_2[key]
-                    }
-                })
+            val = data_2[key]
 
-    diff = scripts.sort_diff_by_key(diff)
+            if isinstance(val, dict):
+                val = compare_data(val, val)
+
+            diff.update(build_node(key, ADDED, val))
+            continue
+
+        if isinstance(data_1[key], dict) and isinstance(data_2[key], dict):
+            val_1, val_2 = data_1[key], data_2[key]
+            val = compare_data(val_1, val_2)
+            diff.update(build_node(key, NESTED, val))
+            continue
+
+        if data_1[key] == data_2[key]:
+            val = data_1[key]
+            diff.update(build_node(key, UNCHANGED, val))
+            continue
+
+        if data_1[key] != data_2[key]:
+            val_1, val_2 = data_1[key], data_2[key]
+
+            if isinstance(val_1, dict):
+                val_1 = compare_data(val_1, val_1)
+            
+            if isinstance(val_2, dict):
+                val_2 = compare_data(val_2, val_2)
+            
+            val = {
+                FIRST_FILE_VAL: val_1,
+                SECOND_FILE_VAL: val_2
+            }
+
+            diff.update(build_node(key, CHANGED, val))
+            continue
 
     return diff
+
+
+def build_node(key, status, vals) -> dict:
+    node = {key: {
+        STATUS: status,
+        VALS: vals
+        }
+    }
+
+    return node
