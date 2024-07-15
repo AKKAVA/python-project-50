@@ -1,11 +1,11 @@
-from gendiff import arg_parser as arg_parser
-from gendiff import gendiff as gendiff
+#!/usr/bin/env python
+from gendiff import arg_parser
+from gendiff import gendiff
 
 
 def main():
     args = arg_parser.arg_parser()
-    style = args.format
-    diff = gendiff.generate_diff(args.first_file, args.second_file, style)
+    diff = gendiff.generate_diff(args.first_file, args.second_file, args.format)
     print(diff)
 
 

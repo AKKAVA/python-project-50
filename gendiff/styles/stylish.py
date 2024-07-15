@@ -12,6 +12,9 @@ from ..comparator import (
 )
 
 
+VALUE = 'VALS'
+
+
 INDENT = ' '
 INDENT_FOR_START = 2
 INDENT_FOR_LEVEL = 4
@@ -26,10 +29,19 @@ def stylish(diff: dict, depth: int = 0,
         res = f'{get_indent(depth)}{symbol} {node_name}: {'{'}\n'
 
     for key, value in diff.items():
-        status, vals = value[STATUS], value[VALS]
+        try:
+            status, vals = value[STATUS], value[VALS]
+        except BaseException:
+            status, vals = VALUE, value
 
         if status == NESTED:
             res += stylish(vals, depth + 1, key)
+
+        elif status == VALUE:
+            if isinstance(vals, dict):
+                res += stylish(vals, depth + 1, key)
+            else:
+                res += format_row(key, vals, depth + 1)
 
         elif status == UNCHANGED:
             res += format_row(key, vals, depth + 1)

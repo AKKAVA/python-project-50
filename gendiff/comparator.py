@@ -25,33 +25,23 @@ def compare_data(data_1: dict, data_2: dict) -> dict:
         if key not in data_2:
             val = data_1[key]
 
-            if isinstance(val, dict):
-                val = compare_data(val, val)
-
             diff.update(build_node(key, REMOVED, val))
-            continue
 
-        if key not in data_1:
+        elif key not in data_1:
             val = data_2[key]
 
-            if isinstance(val, dict):
-                val = compare_data(val, val)
-
             diff.update(build_node(key, ADDED, val))
-            continue
 
-        if isinstance(data_1[key], dict) and isinstance(data_2[key], dict):
+        elif isinstance(data_1[key], dict) and isinstance(data_2[key], dict):
             val_1, val_2 = data_1[key], data_2[key]
             val = compare_data(val_1, val_2)
             diff.update(build_node(key, NESTED, val))
-            continue
 
-        if data_1[key] == data_2[key]:
+        elif data_1[key] == data_2[key]:
             val = data_1[key]
             diff.update(build_node(key, UNCHANGED, val))
-            continue
 
-        if data_1[key] != data_2[key]:
+        elif data_1[key] != data_2[key]:
             val_1, val_2 = data_1[key], data_2[key]
 
             if isinstance(val_1, dict):
@@ -66,7 +56,6 @@ def compare_data(data_1: dict, data_2: dict) -> dict:
             }
 
             diff.update(build_node(key, CHANGED, val))
-            continue
 
     return diff
 
