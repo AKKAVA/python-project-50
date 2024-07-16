@@ -1,5 +1,5 @@
 import json
-from ..comparator import (
+from gendiff.comparator import (
     UNCHANGED,
     CHANGED,
     REMOVED,
@@ -53,6 +53,6 @@ def format_val(val):
 def form_path(path, key):
     if not path:
         return [key,]
-    tmp = [_ for _ in path]
-    tmp.append(key)
-    return tmp
+    path = [_ for _ in path]
+    path.append(key)
+    return path

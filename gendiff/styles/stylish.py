@@ -1,5 +1,5 @@
 import json
-from ..comparator import (
+from gendiff.comparator import (
     UNCHANGED,
     CHANGED,
     REMOVED,

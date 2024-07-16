@@ -1,21 +1,14 @@
 #!/usr/bin/env python
-from gendiff import comparator as comparator
-from gendiff import file_parser as file_parser
-from gendiff.styles import formater as formater
+from gendiff import comparator
+from gendiff import file_parser
+from gendiff.styles import formater
 
 
-def generate_diff(path_1: str, path_2: str, style: str = '') -> str:
+def generate_diff(path_1: str, path_2: str, style_name: str = '') -> str:
     '''
     Get two paths to file
     end generete diff between them
     '''
     data_1, data_2 = file_parser.read_file(path_1), file_parser.read_file(path_2)
-    style = formater.get_style(style)
     diff = comparator.compare_data(data_1, data_2)
-    styled_diff = style_diff(diff, style)
-    return styled_diff
-
-
-def style_diff(diff: dict, style):
-    styled_diff = style(diff).rstrip('\n')
-    return styled_diff
+    return formater.style(style_name, diff)

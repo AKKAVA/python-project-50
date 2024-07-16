@@ -42,19 +42,10 @@ def compare_data(data_1: dict, data_2: dict) -> dict:
             diff.update(build_node(key, UNCHANGED, val))
 
         elif data_1[key] != data_2[key]:
-            val_1, val_2 = data_1[key], data_2[key]
-
-            if isinstance(val_1, dict):
-                val_1 = compare_data(val_1, val_1)
-
-            if isinstance(val_2, dict):
-                val_2 = compare_data(val_2, val_2)
-
             val = {
-                FIRST_FILE_VAL: val_1,
-                SECOND_FILE_VAL: val_2
+                FIRST_FILE_VAL: data_1[key],
+                SECOND_FILE_VAL: data_2[key]
             }
-
             diff.update(build_node(key, CHANGED, val))
 
     return diff
